@@ -13,7 +13,7 @@ fmt+ tracks wallet trades, token holdings and SOL flows on Solana. Spawn your ag
 - Spawn a personal agent, choose the wallets it watches and the rules for its alerts.
 - Check a wallet's biggest recent buys and sells, with transaction references.
 - Read priced token holdings, recent SOL flows and trading patterns.
-- Give an AI agent access to ten tools through one MCP connection.
+- Give an AI agent access to 11 tools through one MCP connection.
 - Follow wallets in Telegram and choose the minimum swap size for alerts.
 - Run the app, API and bot on your own server.
 
@@ -85,6 +85,7 @@ See [MCP setup](mcp/README.md) and the [Agent Skill](mcp/SKILL.md).
 | `top_wallets()` | The wallets fmt+ watches, with balances and activity summaries |
 | `wallet_stats(wallet)` | Win rate, buys, sells and tokens closed over the wallet's recent swaps |
 | `coins_up()` | Coins up 50% or more in 1 hour that tracked wallets traded, with CA, market cap and the traders |
+| `position(wallet, mint)` | One wallet in one coin: the full bag, when the current round of buying started (after any full exit), buys, sells and PnL on the coin |
 | `digest()` | The last hour across tracked wallets: trades, SOL moved, the biggest trade and coins up 50% |
 
 `wallet` is a Solana wallet address. `min_sol` is optional.

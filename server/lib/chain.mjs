@@ -31,7 +31,9 @@ export function heliusToSwap(tx, w) {
   const sol = (me.nativeBalanceChange || 0) / 1e9 + wsol;
   const tok = mine.filter((t) => t.mint !== SOL && !STABLE.has(t.mint));
   if (!tok.length || Math.abs(sol) < 0.05) return null;
-  return { side: sol < 0 ? 'buy' : 'sell', sol: round2(Math.abs(sol)), mint: tok[0].mint, t: tx.timestamp * 1000, sig: tx.signature };
+  // a route can leave dust of another coin (a few cents of a wrapped token): the traded coin is the biggest amount
+  const main = tok.reduce((a, t) => (Math.abs(t.tokenAmount) > Math.abs(a.tokenAmount) ? t : a));
+  return { side: sol < 0 ? 'buy' : 'sell', sol: round2(Math.abs(sol)), mint: main.mint, t: tx.timestamp * 1000, sig: tx.signature };
 }
 
 /** A getTransaction (jsonParsed) result → the same swap shape, or null. */
@@ -61,10 +63,13 @@ export function createChain({ key, log }) {
   let heliusOffUntil = 0;
   const helius = () => Boolean(key) && Date.now() > heliusOffUntil;
   const status = () => ({ helius: Boolean(key), heliusOn: helius(), heliusOffUntil: heliusOffUntil || null });
+  // out of credits → Helius off for an hour; a plain 429 (too many calls this second) → off for a minute only
   const spent = (e) => {
-    if (/429|max usage|credits/i.test(String(e?.message || e))) {
-      if (Date.now() > heliusOffUntil) log('chain.helius.off', { e: String(e.message || e).slice(0, 60) });
-      heliusOffUntil = Date.now() + 3600_000;
+    const m = String(e?.message || e);
+    if (/429|max usage|credits/i.test(m)) {
+      const out = /max usage|credits/i.test(m);
+      if (Date.now() > heliusOffUntil) log('chain.helius.off', { e: m.slice(0, 60), for: out ? '1h' : '1m' });
+      heliusOffUntil = Date.now() + (out ? 3600_000 : 60_000);
       return true;
     }
     return false;
@@ -118,7 +123,7 @@ export function createChain({ key, log }) {
     const out = [];
     for (const s of sigs) {
       try {
-        const tx = await rpc('getTransaction', [s, { encoding: 'jsonParsed', maxSupportedTransactionVersion: 0 }]);
+        const tx = await rpc('getTransaction', [s, { encoding: 'jsonParsed', maxSupportedTransactionVersion: 1 }]);
         const sw = rawToSwap(tx, s, w);
         if (sw) out.push(sw);
       } catch (e) {
@@ -153,9 +158,52 @@ export function createChain({ key, log }) {
     return (m) => symbols.get(m) ?? m.slice(0, 4);
   }
 
+  /**
+   * Many calls of one method: JSON-RPC batches of 10 a second on Helius (its per-second limit counts each call),
+   * else one by one on the public RPC (capped). A plain 429 waits and retries; only "out of credits" turns Helius off.
+   */
+  async function rpcBatch(method, list, cap = 40) {
+    if (helius()) {
+      try {
+        const out = [];
+        for (let i = 0; i < list.length; i += 10) {
+          const body = list.slice(i, i + 10).map((params, k) => ({ jsonrpc: '2.0', id: i + k, method, params }));
+          let r;
+          for (let tries = 0; ; tries++) {
+            try {
+              r = await post(`https://mainnet.helius-rpc.com/?api-key=${key}`, body, 20000);
+              break;
+            } catch (e) {
+              if (tries >= 3 || !/^429/.test(String(e.message)) || /max usage|credits/i.test(String(e.message))) throw e;
+              await sleep(1200 * (tries + 1));
+            }
+          }
+          const byId = new Map((Array.isArray(r) ? r : []).map((x) => [x.id, x]));
+          // a batch answers 200 with a per-call 429 when the per-second limit is hit: ask for those calls again
+          for (let tries = 0; tries < 2; tries++) {
+            const again = body.filter((b) => byId.get(b.id)?.error?.code === 429);
+            if (!again.length) break;
+            await sleep(1200 * (tries + 1));
+            const r2 = await post(`https://mainnet.helius-rpc.com/?api-key=${key}`, again, 20000).catch(() => []);
+            for (const x of Array.isArray(r2) ? r2 : []) byId.set(x.id, x);
+          }
+          body.forEach((b) => out.push(byId.get(b.id)?.result ?? null));
+          if (i + 10 < list.length) await sleep(1000);
+        }
+        return out;
+      } catch (e) {
+        if (!spent(e)) throw e;
+      }
+    }
+    const out = [];
+    for (const params of list.slice(0, cap)) out.push(await publicRpc(method, params).catch(() => null));
+    return out;
+  }
+
   return {
     status,
     rpc,
+    rpcBatch,
     async balance(w) {
       return (await rpc('getBalance', [w])).value / 1e9;
     },

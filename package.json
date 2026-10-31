@@ -27,6 +27,7 @@
     "test": "node --disable-warning=ExperimentalWarning --test 'server/test/*.test.mjs'",
     "check": "npm run copy && npm run numbers && npm run typecheck && npm test",
     "shots": "node scripts/shots.mjs",
+    "xcards": "node scripts/xcards.mjs",
     "assets": "node scripts/assets.mjs",
     "diagrams": "node scripts/diagrams.mjs",
     "brand": "node scripts/brand.mjs",

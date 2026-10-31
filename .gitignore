@@ -11,3 +11,5 @@ CLAUDE.md
 AGENTS.md
 deploy/release.conf
 mcp/node_modules/
+# X cards: the HTML is generated with local font paths (npm run xcards)
+brand/x-cards/*.html

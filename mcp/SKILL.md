@@ -11,6 +11,7 @@ Tools (MCP server `fmt`, read-only, zero keys):
 - `live(min_sol)` — biggest swaps across top wallets now. `top_wallets()` — who fmt+ watches.
 - `coins_up()` — coins up 50%+ in 1 hour that tracked wallets traded, with CA. `digest()` — the last hour in one answer.
 - `wallet_stats(wallet)` — win rate, buys, sells and tokens closed.
+- `position(wallet, mint)` — one wallet in one coin: full bag, building since (after any full exit), PnL on the coin.
 
 Answer in 3 lines max: what happened, how big (SOL), what to watch next. Link `https://fmt.plus/w/<wallet>`.
 Never give financial advice; report what the chain shows.

@@ -35,7 +35,7 @@ export const TOOLS = [
   { name: 'watch', args: 'wallet', d: 'Push big moves to Telegram' },
 ];
 
-function heliusKey(cfg) {
+export function heliusKey(cfg) {
   if (cfg.env.HELIUS_KEY) return cfg.env.HELIUS_KEY.trim();
   try {
     return readFileSync(join(cfg.dataDir, 'helius.key'), 'utf8').trim();

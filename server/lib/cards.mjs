@@ -268,3 +268,90 @@ export async function signalCard(sig) {
   } else text(g, who, 600, 380, { size: 48, weight: 700, color: ink, align: 'center' });
   return png(c);
 }
+
+// ── buy alert with the trader's whole position in the coin (server/routes/positions.mjs) ─────────────────────────
+const big = (n) => (n >= 1e9 ? `${(n / 1e9).toFixed(1)}B` : n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(1)}K` : `${Math.round(n)}`);
+export const sinceShort = (t) => {
+  const m = Math.max(1, Math.round((Date.now() - t) / 60000));
+  if (m < 60) return `${m} min`;
+  if (m < 2880) return `${Math.round(m / 60)} h`;
+  return new Date(t).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+};
+export { big as bigNum };
+
+/** Price line over the trader's whole history in the coin, with a dot per buy/sell (radius by SOL). */
+function drawTrades(g, chart, x, y, w, h, current, lastExit) {
+  const pts = chart.pts;
+  const t0 = pts[0][0];
+  const t1 = pts[pts.length - 1][0];
+  const lo = Math.min(...pts.map((p) => p[1]));
+  const hi = Math.max(...pts.map((p) => p[1]));
+  const span = hi - lo || hi || 1;
+  const X = (t) => x + ((Math.min(Math.max(t, t0), t1) - t0) / (t1 - t0 || 1)) * w;
+  const Y = (v) => y + h - ((v - lo) / span) * h;
+  const priceAt = (t) => {
+    let best = pts[0];
+    for (const p of pts) if (Math.abs(p[0] - t) < Math.abs(best[0] - t)) best = p;
+    return best[1];
+  };
+  if (lastExit) {
+    g.save();
+    g.setLineDash([10, 10]);
+    g.strokeStyle = C.mute;
+    g.lineWidth = 3;
+    g.beginPath();
+    g.moveTo(X(lastExit), y - 6);
+    g.lineTo(X(lastExit), y + h + 6);
+    g.stroke();
+    g.restore();
+  }
+  g.beginPath();
+  pts.forEach(([t, v], i) => (i ? g.lineTo(X(t), Y(v)) : g.moveTo(X(t), Y(v))));
+  g.strokeStyle = C.ink;
+  g.lineWidth = 4;
+  g.lineJoin = 'round';
+  g.stroke();
+  const marks = chart.marks || [];
+  const maxSol = Math.max(...marks.map((m) => m.sol), 0.0001);
+  // this buy last, so its ring sits on top of an earlier buy at the same time
+  for (const m of [...marks.filter((x) => x !== current), ...marks.filter((x) => x === current)]) {
+    const r = 8 + 14 * Math.sqrt(m.sol / maxSol);
+    const mx = X(m.t);
+    const my = Y(priceAt(m.t));
+    g.beginPath();
+    g.arc(mx, my, r, 0, Math.PI * 2);
+    g.fillStyle = m.side === 'buy' ? C.up : C.down;
+    g.fill();
+    if (m === current) {
+      g.beginPath();
+      g.arc(mx, my, 32, 0, Math.PI * 2); // larger than any dot (max 22), so it stays visible on a crowded spot
+      g.strokeStyle = C.ink;
+      g.lineWidth = 4;
+      g.stroke();
+    }
+  }
+}
+
+export async function positionCard(ev, pos) {
+  if (!(await load())) return null;
+  const { c, g } = frame('alert-buy');
+  panel(g, 170, 110, 860, 450, 'buy');
+  text(g, ev.name, 210, 185, { size: 44, weight: 700 });
+  text(g, `$${pos.sym || ev.sym || ev.mint.slice(0, 4)}`, 990, 185, { size: 44, weight: 800, align: 'right' });
+  text(g, `+${sol(ev.sol)}`, 600, 265, { size: 64, font: MONO, weight: 700, color: TYPE.buy.ink, align: 'center' });
+  if (pos.chart?.pts?.length > 2) {
+    const marks = pos.chart.marks || [];
+    const current = marks.filter((m) => m.side === 'buy').sort((a, b) => Math.abs(a.t - ev.t) - Math.abs(b.t - ev.t))[0];
+    drawTrades(g, pos.chart, 230, 300, 740, 140, current, pos.reentry?.lastExit ?? null);
+  }
+  const pnl = pos.pnl?.pct ?? null;
+  const cells = [
+    [`Bag ${pos.bag ? `${pos.bag.valueSol >= 10 ? Math.round(pos.bag.valueSol * 10) / 10 : Math.round(pos.bag.valueSol * 100) / 100} SOL` : '0 SOL'}`, 'left', 205, C.ink],
+    [`Since ${pos.building?.since ? sinceShort(pos.building.since) : '—'}`, 'center', 600, C.ink],
+    pos.pnl?.costKnown === false || pos.pnl?.sol == null
+      ? ['PnL ?', 'right', 995, C.mute]
+      : [pnl === null ? `PnL ${pos.pnl.sol >= 0 ? '+' : ''}${sol(pos.pnl.sol)}` : `PnL ${pnl > 0 ? '+' : ''}${pnl}%`, 'right', 995, pos.pnl.sol >= 0 ? C.up : C.down],
+  ];
+  for (const [t, align, x, color] of cells) text(g, t, x, 520, { size: 32, font: MONO, weight: 700, color, align });
+  return png(c);
+}

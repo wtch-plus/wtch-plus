@@ -21,6 +21,7 @@ const TOOLS: [string, string][] = [
   ['wallet_stats(wallet)', 'win rate, buys and sells'],
   ['coins_up()', 'coins up 50% in 1 hour'],
   ['digest()', 'the last hour in one answer'],
+  ['position(wallet, mint)', 'one wallet in one coin'],
 ];
 
 export function Docs() {
