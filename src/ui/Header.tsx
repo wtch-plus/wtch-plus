@@ -12,7 +12,7 @@ export const NAV: [string, string][] = [
   ['/docs', copy.nav.docs],
 ];
 
-export const githubUrl = 'https://github.com/fmt-plus/fmt-plus';
+export const githubUrl = 'https://github.com/fmt-plus/wtch-plus';
 export const xUrl = brand.x ? `https://x.com/${brand.x}` : 'https://x.com';
 
 export function Header() {
