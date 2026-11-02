@@ -43,7 +43,7 @@ export default async function telegram(ctx) {
   let offset = 0;
   let stopped = false;
   let sent = 0;
-  const site = cfg.origin || 'https://fmt.plus';
+  const site = cfg.origin || 'https://wtch.plus';
 
   // the site's "Get Telegram alerts" link needs only the bot's name: a dev server that leaves polling to prod still has it
   let saved = null;
@@ -126,7 +126,7 @@ export default async function telegram(ctx) {
     inline_keyboard: [
       [{ text: 'Biggest trades today', callback_data: 'digest' }, { text: 'My alerts', callback_data: 'list' }],
       [{ text: 'Tune your agent', web_app: { url: `${site}/tg` } }],
-      [{ text: 'Open fmt.plus', url: site }],
+      [{ text: 'Open wtch.plus', url: site }],
     ],
   };
   // under every coin alert: copy the CA in one tap (Bot API copy_text), open the chart
@@ -150,7 +150,7 @@ export default async function telegram(ctx) {
   async function digest(chat) {
     const day = Date.now() - 86400_000;
     const rows = db.all('SELECT w, side, sol, mint, sym, t FROM trades WHERE t > ? ORDER BY sol DESC LIMIT 5', day).map((r) => ({ ...r, name: label(r.w) }));
-    if (!rows.length) return say(chat, 'fmt+ recorded zero trades in the last 24 hours.');
+    if (!rows.length) return say(chat, 'wtch+ recorded zero trades in the last 24 hours.');
     return photo(chat, await digestCard(rows).catch(() => null), `<b>Biggest trades, last 24 hours</b>\n\nTracked wallets: ${WATCH.length}`, MENU);
   }
 
@@ -233,11 +233,11 @@ export default async function telegram(ctx) {
       `Growth signals: ${sigs.length}`,
       ...(sigs.length ? ['', ...sigs.map((x) => `${tick(x)} +${Math.round(x.change1h)}% in 1 hour`)] : []),
     ].join('\n');
-  const walletCaption = (w) => [`<b>${esc(label(w))}</b>`, '', `<code>${w}</code>`, '', `<a href="${site}/w/${w}">Open this wallet on fmt.plus</a>`].join('\n');
+  const walletCaption = (w) => [`<b>${esc(label(w))}</b>`, '', `<code>${w}</code>`, '', `<a href="${site}/w/${w}">Open this wallet on wtch.plus</a>`].join('\n');
 
   async function card(chat, w) {
     const v = await new Promise((res) => bus.emit('wallet?', w, res));
-    if (!v) return say(chat, 'fmt+ could not read this wallet, so try again in a minute.');
+    if (!v) return say(chat, 'wtch+ could not read this wallet, so try again in a minute.');
     const trades = v.swaps.slice(0, 5).map((s) => `${s.side === 'buy' ? 'Bought' : 'Sold'} ${s.sol} SOL of $${esc(s.sym || s.mint.slice(0, 4))}.`);
     const buf = await walletCard(v, label(w)).catch(() => null);
     if (buf) return photo(chat, buf, walletCaption(w));
@@ -252,7 +252,7 @@ export default async function telegram(ctx) {
         '',
         ...trades,
         '',
-        `<a href="${site}/w/${w}">Open this wallet on fmt.plus</a>`,
+        `<a href="${site}/w/${w}">Open this wallet on wtch.plus</a>`,
       ].join('\n'),
     );
   }
@@ -308,7 +308,7 @@ export default async function telegram(ctx) {
     const top = recent.slice().sort((x, y) => y.sol - x.sol);
     const sig = { id: 'demo', mint: (buy || recent[0]).mint, sym: (buy || recent[0]).sym, change1h: 64, wallets: [...new Map(recent.slice(0, 6).map((r) => [r.w, { w: r.w, name: r.name }])).values()].slice(0, 3) };
     const r = chatRow(chat) ?? { bar: 10, all_top: 1 };
-    await photo(chat, await welcomeCard().catch(() => null), `<b>Welcome to fmt+</b>\n\nYou get an alert here when one of the ${WATCH.length} top wallets trades 10 SOL or more.\n\n${HELP}`, MENU);
+    await photo(chat, await welcomeCard().catch(() => null), `<b>Welcome to wtch+</b>\n\nYou get an alert here when one of the ${WATCH.length} top wallets trades 10 SOL or more.\n\n${HELP}`, MENU);
     await photo(chat, await menuCard({ wallets: r.all_top ? WATCH.length : watched(chat).length, bar: r.bar }).catch(() => null), `<b>Your agent</b>\n\nWallets: ${r.all_top ? WATCH.length : watched(chat).length}\nSmallest trade: ${r.bar} SOL`, MENU);
     if (buy) {
       const pos = await positionOf(buy).catch(() => null);
@@ -336,7 +336,7 @@ export default async function telegram(ctx) {
       if (am) {
         let a = null;
         bus.emit('agent?', am[1], (x) => (a = x));
-        if (!a) return say(chat, 'This agent link is out of date, so open fmt.plus and press the Telegram button again.');
+        if (!a) return say(chat, 'This agent link is out of date, so open wtch.plus and press the Telegram button again.');
         bus.emit('agent:link', a.id, chat, m.from?.username ?? null);
         syncChat(chat, a);
         const side = a.rules.sides === 'all' ? 'every trade' : a.rules.sides === 'buys' ? 'every buy' : 'every sell';
@@ -352,10 +352,10 @@ export default async function telegram(ctx) {
         db.run('INSERT OR IGNORE INTO tg_watch (chat, w) VALUES (?, ?)', chat, arg);
         db.run('UPDATE tg_chats SET all_top = 0, bar = 0.1 WHERE chat = ?', chat);
         bus.emit('track', arg);
-        await photo(chat, await welcomeCard().catch(() => null), `<b>Welcome to fmt+</b>\n\nYou get an alert here for every trade of 0.1 SOL or more by <b>${esc(label(arg))}</b>.\n\n${HELP}`, MENU);
+        await photo(chat, await welcomeCard().catch(() => null), `<b>Welcome to wtch+</b>\n\nYou get an alert here for every trade of 0.1 SOL or more by <b>${esc(label(arg))}</b>.\n\n${HELP}`, MENU);
         return card(chat, arg);
       }
-      return photo(chat, await welcomeCard().catch(() => null), `<b>Welcome to fmt+</b>\n\nYou get an alert here when one of the ${WATCH.length} top wallets trades 10 SOL or more.\n\n${HELP}`, MENU);
+      return photo(chat, await welcomeCard().catch(() => null), `<b>Welcome to wtch+</b>\n\nYou get an alert here when one of the ${WATCH.length} top wallets trades 10 SOL or more.\n\n${HELP}`, MENU);
     }
     if (!chatRow(chat)) db.run('INSERT INTO tg_chats (chat, t) VALUES (?, ?)', chat, now);
     if (cmd === '/watch' || cmd === '/unwatch' || cmd === '/w') {

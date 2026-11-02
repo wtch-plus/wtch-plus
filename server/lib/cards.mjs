@@ -7,13 +7,13 @@ import { join } from 'node:path';
 import { SERVER_DIR } from './config.mjs';
 
 const ASSETS = join(SERVER_DIR, 'assets');
-const C = { ink: '#0e3b36', mute: '#4d6662', up: '#0a7a33', down: '#b0105f', blue: '#0000ff', rule: 'rgba(14,59,54,0.18)' };
+const C = { ink: '#202422', mute: '#6A7167', up: '#0a7a33', down: '#b0105f', blue: '#202422', rule: 'rgba(32,36,34,0.18)' };
 // one color per message type: buy green, sell pink, coin up lime, digest blue (each with its tint)
 const TYPE = {
   buy: { main: '#0a7a33', tint: '#e3f6e9', ink: '#0a7a33' },
   sell: { main: '#b0105f', tint: '#fde7f1', ink: '#b0105f' },
-  up: { main: '#b7f540', tint: '#b7f540', ink: '#0e3b36' },
-  digest: { main: '#0000ff', tint: '#e6e8ff', ink: '#0000ff' },
+  up: { main: '#D7F542', tint: '#D7F542', ink: '#202422' },
+  digest: { main: '#202422', tint: '#e4e6df', ink: '#202422' },
 };
 /** A rounded tint panel with a solid stripe on top: the color that names the message type. */
 function panel(g, x, y, w, h, type) {
@@ -60,7 +60,7 @@ function frame(bg) {
   const list = bgs.get(bg) ?? [];
   if (list.length) g.drawImage(list[Math.floor(Math.random() * list.length)], 0, 0, 1200, 675);
   else {
-    g.fillStyle = '#eef2f0';
+    g.fillStyle = '#F2F1E8';
     g.fillRect(0, 0, 1200, 675);
   }
   g.textBaseline = 'alphabetic';
