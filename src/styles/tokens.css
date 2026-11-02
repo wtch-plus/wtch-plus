@@ -2,23 +2,23 @@
 :root {
   color-scheme: light;
   /* palette */
-  --bg: #eef2f0;
+  --bg: #F2F1E8;
   --surface: #ffffff;
   --surface-hi: #ffffff;
   --surface-2: #f6f7f7;
   --surface-3: #edf0ef;
-  --ink: #0e3b36;
+  --ink: #202422;
   --ink-2: #375954;
-  --mute: #5b7470;
+  --mute: #6A7167;
   --line: #e5eae9;
-  --accent: #0000ff;
+  --accent: #202422;
   --accent-hi: #0029ff;
   --accent-ink: #ffffff;
   --accent-edge: rgba(255, 255, 255, 0.22);
   --accent-soft: rgba(0, 0, 255, 0.12);
   --accent-wash: rgba(0, 0, 255, 0.1);
   --accent-glow: rgba(0, 0, 255, 0.42);
-  --accent2: #b7f540;
+  --accent2: #D7F542;
   --accent2-ink: #041d1a;
   --accent2-wash: rgba(183, 245, 64, 0.07);
   --up: #0a8a3a;
@@ -26,24 +26,24 @@
   --up-soft: rgba(10, 138, 58, 0.18);
   --down-soft: rgba(192, 19, 107, 0.18);
   --tint-0: #cadcfe;
-  --tint-0-ink: #0000ff;
+  --tint-0-ink: #202422;
   --tint-1: #ecf8e0;
   --tint-1-ink: #578c00;
   --tint-2: #d9e7db;
   --tint-2-ink: #0a8a3a;
   --tint-3: #dde8fb;
-  --tint-3-ink: #0000ff;
+  --tint-3-ink: #202422;
   --tint-4: #f0f7ea;
   --tint-4-ink: #5c9300;
   --tint-5: #e7ebea;
-  --tint-5-ink: #0e3b36;
+  --tint-5-ink: #202422;
   --tint-ink: var(--tint-0-ink);
-  --mark-color: #0000ff;
+  --mark-color: #202422;
   --hl: rgba(255, 255, 255, 0.85);
-  --scrim: rgba(14, 59, 54, 0.34);
-  --shadow-card: 0 1px 2px rgba(14, 59, 54, 0.05), 0 14px 36px -18px rgba(14, 59, 54, 0.2), inset 0 0 0 1px rgba(14, 59, 54, 0.035);
-  --shadow-1: 0 1px 2px rgba(14, 59, 54, 0.06), 0 6px 16px -8px rgba(14, 59, 54, 0.14);
-  --shadow-pop: 0 30px 70px -22px rgba(14, 59, 54, 0.38), 0 2px 8px rgba(14, 59, 54, 0.08);
+  --scrim: rgba(32, 36, 34, 0.34);
+  --shadow-card: 0 1px 2px rgba(32, 36, 34, 0.05), 0 14px 36px -18px rgba(32, 36, 34, 0.2), inset 0 0 0 1px rgba(32, 36, 34, 0.035);
+  --shadow-1: 0 1px 2px rgba(32, 36, 34, 0.06), 0 6px 16px -8px rgba(32, 36, 34, 0.14);
+  --shadow-pop: 0 30px 70px -22px rgba(32, 36, 34, 0.38), 0 2px 8px rgba(32, 36, 34, 0.08);
 
   /* type */
   --font-display: 'Inter Tight Variable', 'Inter Tight', ui-sans-serif, system-ui, sans-serif;

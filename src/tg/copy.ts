@@ -1,10 +1,10 @@
 // Mini App strings (checked by `node scripts/copycheck.mjs src/tg/copy.ts`): one affirmative sentence or one fact each.
 export const t = {
-  title: 'Your fmt+ agent',
-  loading: 'fmt+ is loading your agent.',
-  outside: 'Open this page from the fmt+ bot in Telegram.',
-  noAgent: 'Spawn your agent on fmt.plus, then press the Telegram button there.',
-  openSite: 'Open fmt.plus',
+  title: 'Your wtch+ agent',
+  loading: 'wtch+ is loading your agent.',
+  outside: 'Open this page from the wtch+ bot in Telegram.',
+  noAgent: 'Spawn your agent on wtch.plus, then press the Telegram button there.',
+  openSite: 'Open wtch.plus',
   saved: 'Saved',
   failed: 'Saving failed, so try again.',
   tabs: { feed: 'Feed', wallets: 'Wallets', rules: 'Rules', alerts: 'Alerts' },
@@ -28,7 +28,7 @@ export const t = {
     buys: 'Buys only',
     sells: 'Sells only',
     fresh: 'New tokens only',
-    freshLead: 'A new token is one fmt+ first saw in the last 24 hours.',
+    freshLead: 'A new token is one wtch+ first saw in the last 24 hours.',
   },
   alerts: {
     cadence: 'How often the bot writes',

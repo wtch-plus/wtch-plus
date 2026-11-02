@@ -69,7 +69,7 @@ function Fig({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-/** Solana swaps → fmt+ keeps real trades → site / Telegram / your AI. */
+/** Solana swaps → wtch+ keeps real trades → site / Telegram / your AI. */
 function FlowFig() {
   const f = F.flow;
   const out = [f.site, f.tg, f.ai];
@@ -148,7 +148,7 @@ function AlertFig() {
     <Fig label={F.alert.label}>
       <div className="b-tg">
         <div className="b-tg-msg">
-          <b>fmt+</b>
+          <b>wtch+</b>
           <p>{F.alert.text}</p>
           <p className="b-tg-links">{F.alert.links}</p>
         </div>

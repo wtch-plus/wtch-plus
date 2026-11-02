@@ -7,9 +7,9 @@
     "node": ">=22.13"
   },
   "trench": {
-    "name": "fmt+",
+    "name": "wtch+",
     "slug": "fmt",
-    "domain": "fmt.plus",
+    "domain": "wtch.plus",
     "template": "app",
     "webPort": 5530,
     "apiPort": 5531

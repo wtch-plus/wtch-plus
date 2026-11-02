@@ -64,3 +64,14 @@ mcp.{{DOMAIN}} {
 	rewrite * /api/mcp
 	reverse_proxy 127.0.0.1:{{PORT}}
 }
+
+# the old name: every fmt.plus address moves to the same path on {{DOMAIN}}
+fmt.plus, www.fmt.plus, docs.fmt.plus {
+	redir https://{{DOMAIN}}{uri} 308
+}
+blog.fmt.plus {
+	redir https://blog.{{DOMAIN}}{uri} 308
+}
+mcp.fmt.plus {
+	redir https://mcp.{{DOMAIN}}{uri} 308
+}

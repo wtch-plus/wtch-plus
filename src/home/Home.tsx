@@ -19,7 +19,7 @@ export function Home() {
   const lines = copy.home.title.split('\n');
   return (
     <main className="g g-home">
-      <div className="g-word" aria-label="fmt+">
+      <div className="g-word" aria-label="wtch+">
         fmt<sup>+</sup>
         <span className="g-cursor" />
       </div>

@@ -1,11 +1,11 @@
 {
-  "name": "fmt-plus",
+  "name": "wtch-plus",
   "version": "0.3.0",
-  "description": "fmt+ MCP: every trench tool for your AI agent. Read-only Solana wallet intel. Zero keys.",
+  "description": "wtch+ MCP: every trench tool for your AI agent. Read-only Solana wallet intel. Zero keys.",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "fmt-plus": "index.mjs"
+    "wtch-plus": "index.mjs"
   },
   "files": [
     "index.mjs",

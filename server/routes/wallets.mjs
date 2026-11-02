@@ -1,4 +1,4 @@
-// fmt+ core: watch trader wallets on Solana and turn their swaps into ranked pushes.
+// wtch+ core: watch trader wallets on Solana and turn their swaps into ranked pushes.
 //   snapshot.events   last 60 swaps across watched wallets (sqlite, so a restart paints at once)
 //   snapshot.board    watched wallets with balance + 24h swap count
 //   SSE `trade`       one swap { w, name, side, sol, mint, sym, t, sig, score }
@@ -90,7 +90,7 @@ export default async function wallets(ctx) {
 
   const walletCache = swr(async (w) => {
     const [sol, bags, read] = await Promise.all([chain.balance(w), chain.bags(w).catch(() => []), chain.history(w).catch(() => [])]);
-    // add the trades fmt+ already recorded for this wallet (the public RPC fallback misses many behind spam)
+    // add the trades wtch+ already recorded for this wallet (the public RPC fallback misses many behind spam)
     const bySig = new Map(read.map((s) => [s.sig, s]));
     for (const r of db.all('SELECT sig, side, sol, mint, sym, t FROM trades WHERE w = ? ORDER BY t DESC LIMIT 100', w)) if (!bySig.has(r.sig) && tokenTrade(r)) bySig.set(r.sig, r);
     const swaps = [...bySig.values()].filter(tokenTrade).sort((a, b) => b.t - a.t).slice(0, 100);

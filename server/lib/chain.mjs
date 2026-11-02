@@ -1,4 +1,4 @@
-// Solana reads for fmt+, Helius first and the public RPC as the fallback.
+// Solana reads for wtch+, Helius first and the public RPC as the fallback.
 // Helius is cheap only for plain RPC (1 credit); its parsed-history API costs ~100 credits a call, so polling asks
 // for new signatures over RPC and parses only the new ones. A 429 / "max usage" turns Helius off for an hour and
 // every read goes to api.mainnet-beta.solana.com (plus Jupiter prices and DexScreener symbols).

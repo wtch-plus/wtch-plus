@@ -883,8 +883,8 @@ export function Lookup() {
 }
 
 const SNIP = {
-  claude: 'claude mcp add --transport http fmt https://mcp.fmt.plus',
-  cursor: '{ "mcpServers": { "fmt": { "url": "https://mcp.fmt.plus" } } }',
+  claude: 'claude mcp add --transport http wtch https://mcp.wtch.plus',
+  cursor: '{ "mcpServers": { "wtch": { "url": "https://mcp.wtch.plus" } } }',
 };
 export function McpSnippets() {
   const [done, setDone] = useState<string | null>(null);

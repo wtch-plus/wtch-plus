@@ -1,5 +1,5 @@
 // The numbers behind /docs. `npm run numbers` runs checks() so the docs always add up.
-// The worked example is a real round trip: Cooker's $FLOAT swaps seen by fmt+ (Helius, 2026-10-29).
+// The worked example is a real round trip: Cooker's $FLOAT swaps seen by wtch+ (Helius, 2026-10-29).
 
 export interface Inputs {
   /** SOL into the token (one buy). */

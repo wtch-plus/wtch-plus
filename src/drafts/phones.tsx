@@ -1,4 +1,4 @@
-// The home page phone: a dark-theme Telegram chat with the fmt+ bot. Real messages slide in at the bottom,
+// The home page phone: a dark-theme Telegram chat with the wtch+ bot. Real messages slide in at the bottom,
 // one every few seconds, with the same link row the bot sends (server/routes/telegram.mjs).
 // Message types carry a word label and a color: buy green, sell pink, coin up lime, digest blue.
 import { useEffect, useMemo, useState } from "react";
@@ -293,7 +293,7 @@ export function PhoneLive() {
         <span className="v-tgchat-back" aria-hidden>
           ‹
         </span>
-        <img src="/symbol.svg" alt="" />
+        <img src="/symbol-acid.svg" alt="" />
         <div>
           <b>{M.bot}</b>
           <span>{M.botSub}</span>

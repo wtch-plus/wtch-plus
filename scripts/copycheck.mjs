@@ -29,7 +29,7 @@ const TECH = new Set([
 ]);
 
 const APPROVED = new Set([
-  'fmt+ is an MCP with a personalized AI agent on top: it tracks smart money, indexes every trade and alerts you to what matters.',
+  'wtch+ is an MCP with a personalized AI agent on top: it tracks smart money, indexes every trade and alerts you to what matters.',
   'It tracks smart money on Solana, indexes every trade and alerts you to what matters.',
 ]); // strings the owner chose word for word (the grade check skips them)
 

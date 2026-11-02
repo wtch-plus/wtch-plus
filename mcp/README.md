@@ -1,23 +1,23 @@
-# fmt+ MCP
+# wtch+ MCP
 
 Every trench tool for your AI agent. Read-only Solana wallet intel. Zero keys. MIT.
 
 Remote, no install:
 
 ```bash
-claude mcp add --transport http fmt https://mcp.fmt.plus
+claude mcp add --transport http wtch https://mcp.wtch.plus
 ```
 
 Local stdio:
 
 ```bash
-claude mcp add fmt -- npx -y fmt-plus
+claude mcp add wtch -- npx -y wtch-plus
 ```
 
 Cursor / any MCP client:
 
 ```json
-{ "mcpServers": { "fmt": { "url": "https://mcp.fmt.plus" } } }
+{ "mcpServers": { "wtch": { "url": "https://mcp.wtch.plus" } } }
 ```
 
 Tools: `whats_important`, `trades`, `bags`, `pnl`, `style`, `live`, `top_wallets`, `wallet_stats`, `coins_up`, `digest`, `position`.

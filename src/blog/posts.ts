@@ -10,9 +10,9 @@ export interface Post {
   date: string;
 }
 export const POSTS: Post[] = [
-  { key: 'what', slug: 'what-is-fmt-plus', cover: '/blog/cover-01.jpg', date: '2026-10-29' },
+  { key: 'what', slug: 'what-is-wtch-plus', cover: '/blog/cover-01.jpg', date: '2026-10-29' },
   { key: 'spawn', slug: 'spawn-an-agent', cover: '/blog/cover-04.jpg', date: '2026-10-29' },
-  { key: 'mcp', slug: 'use-fmt-plus-in-your-ai', cover: '/blog/cover-05.jpg', date: '2026-10-29' },
+  { key: 'mcp', slug: 'use-wtch-plus-in-your-ai', cover: '/blog/cover-05.jpg', date: '2026-10-29' },
 ];
 export const postPath = (p: Post) => to(`/blog/${p.slug}`);
 export const postBySlug = (slug: string) => POSTS.find((p) => p.slug === slug) ?? null;

@@ -1,5 +1,5 @@
-// Remote MCP (Streamable HTTP, stateless JSON): POST /api/mcp. Caddy serves it as https://mcp.fmt.plus.
-//   claude mcp add --transport http fmt https://mcp.fmt.plus
+// Remote MCP (Streamable HTTP, stateless JSON): POST /api/mcp. Caddy serves it as https://mcp.wtch.plus.
+//   claude mcp add --transport http fmt https://mcp.wtch.plus
 // GET /api/mcp answers 405 (no server-initiated stream). Tools read this server's own API.
 import { handle } from '../lib/mcp-core.mjs';
 import { sendJson } from '../lib/http.mjs';
@@ -8,7 +8,7 @@ export default async function mcp(ctx) {
   const base = `http://127.0.0.1:${ctx.cfg.port}/api`;
   const get = async (p) => {
     const r = await fetch(base + p, { signal: AbortSignal.timeout(20000) });
-    if (!r.ok) throw new Error(`fmt+ API ${r.status}`);
+    if (!r.ok) throw new Error(`wtch+ API ${r.status}`);
     return r.json();
   };
   const limit = ctx.rate(60, 30);

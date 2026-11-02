@@ -22,15 +22,15 @@ export const copy = {
 
   // the two redesign drafts (src/drafts): one affirmative sentence per text, one fact per label
   d: {
-    product: 'fmt+ is an MCP with a personalized AI agent on top: it tracks smart money, indexes every trade and alerts you to what matters.',
+    product: 'wtch+ is an MCP with a personalized AI agent on top: it tracks smart money, indexes every trade and alerts you to what matters.',
     how: 'Spawn your agent, pick wallets and rules, and get the trades in Telegram.',
-    safe: 'fmt+ reads data from the public Solana chain.',
-    wordmark: 'fmt+ home page',
+    safe: 'wtch+ reads data from the public Solana chain.',
+    wordmark: 'wtch+ home page',
     nav: { agent: 'Your agent', wallets: 'Wallets', trades: 'Trades', mcp: 'MCP', blog: 'Blog' },
     spawnCta: 'Spawn your agent',
     drawer: { title: 'Your agent', close: 'Close the agent panel', open: 'Open your agent', feed: 'Feed', settings: 'Settings', stats: 'Your stats' },
     feed: {
-      tgLine: 'The fmt+ bot can send this same feed to your Telegram.',
+      tgLine: 'The wtch+ bot can send this same feed to your Telegram.',
       tgCta: 'Get this feed in Telegram',
       tipsTitle: 'Make this feed yours',
       tip1: 'Tap a message type below to hide it on this page.',
@@ -40,16 +40,16 @@ export const copy = {
       typesLabel: 'Message types in this feed',
       types: { buy: 'Buys', sell: 'Sells', up: 'Coins up 50%', digest: 'Digests' },
     },
-    mcpCta: 'Add fmt+ to your AI',
+    mcpCta: 'Add wtch+ to your AI',
     connecting: 'Connecting',
     phones: { alert: 'A Telegram alert from your agent', stats: 'The stats of a wallet', rules: 'The rules of your agent' },
     how4: {
       title: 'How it works',
       steps: [
-        { t: 'Spawn', d: 'Your wallet signs one free message, and fmt+ creates your agent.' },
+        { t: 'Spawn', d: 'Your wallet signs one free message, and wtch+ creates your agent.' },
         { t: 'Watch', d: 'Pick your own wallet, top traders or any address.' },
         { t: 'Filter', d: 'Set the smallest trade size and the trade side.' },
-        { t: 'Alert', d: 'The fmt+ bot sends the matching trades to your Telegram.' },
+        { t: 'Alert', d: 'The wtch+ bot sends the matching trades to your Telegram.' },
       ],
     },
     agent: {
@@ -88,7 +88,7 @@ export const copy = {
         hourly: 'Hourly digest',
         daily: 'Daily digest',
       },
-      s4: { t: 'Connect Telegram', d: 'The fmt+ bot sends the alerts of your agent to your Telegram.', b: 'Open the Telegram bot', ok: 'Your Telegram is connected.', start: 'Press Start in Telegram to turn on the alerts.' },
+      s4: { t: 'Connect Telegram', d: 'The wtch+ bot sends the alerts of your agent to your Telegram.', b: 'Open the Telegram bot', ok: 'Your Telegram is connected.', start: 'Press Start in Telegram to turn on the alerts.' },
       matches: 'Recent trades that match your rules',
       previewDefault: 'Recent trades of 0.1 SOL or more by tracked wallets',
       previewEmpty: 'Add top traders in Settings to fill this feed.',
@@ -103,10 +103,10 @@ export const copy = {
       other: 'Wallet stats',
       connect: 'Spawn your agent to see the stats of your wallet here.',
       cover: 'These numbers cover the last {n} trades of this wallet and were updated {ago}.',
-      loading: 'fmt+ is reading this wallet from Solana.',
+      loading: 'wtch+ is reading this wallet from Solana.',
       fail: 'Solana is slow right now, so try again in a minute.',
       retry: 'Try again',
-      empty: 'fmt+ found zero trades for this wallet.',
+      empty: 'wtch+ found zero trades for this wallet.',
       sol: 'SOL balance',
       tokens: 'Value of tokens held (USD)',
       tokensTraded: 'Tokens traded',
@@ -126,7 +126,7 @@ export const copy = {
       alerts: 'Get Telegram alerts for this wallet',
       watch: 'Add to my agent',
       watching: 'Your agent watches this wallet.',
-      defsTitle: 'How fmt+ counts these numbers',
+      defsTitle: 'How wtch+ counts these numbers',
       defs: [
         'SOL balance is the SOL in this wallet right now.',
         'Token value is the Jupiter price of each token times the amount this wallet holds.',
@@ -152,11 +152,11 @@ export const copy = {
       alerts: 'Telegram alerts',
       getAlerts: 'Get alerts',
     },
-    tracked: { title: 'Tracked wallets', lead: 'fmt+ records every trade of these wallets.', top: 'Top traders', added: 'Wallets added by their owners' },
+    tracked: { title: 'Tracked wallets', lead: 'wtch+ records every trade of these wallets.', top: 'Top traders', added: 'Wallets added by their owners' },
     recent: { title: 'Recent trades by tracked wallets', lead: 'New trades appear at the top of this table.', latest: 'Latest trades by tracked wallets', all: 'See all trades' },
     lookup: { label: 'Look up any wallet', hint: 'Paste a Solana wallet address', go: 'Show stats', bad: 'Paste a valid Solana wallet address.' },
     mcp: {
-      title: 'Add fmt+ to your AI',
+      title: 'Add wtch+ to your AI',
       lead: 'One line connects Claude, Cursor or any MCP client to the same wallet data.',
       claude: 'Claude Code',
       cursor: 'Cursor',
@@ -172,7 +172,7 @@ export const copy = {
         ['pnl', 'Sums the SOL in, the SOL out and the net SOL of recent swaps.'],
         ['style', 'Shows the typical trade size and pace of a wallet.'],
         ['live', 'Lists the latest swaps of all tracked wallets.'],
-        ['top_wallets', 'Lists the wallets fmt+ tracks.'],
+        ['top_wallets', 'Lists the wallets wtch+ tracks.'],
         ['wallet_stats', 'Shows the win rate, buys and sells of a wallet.'],
         ['coins_up', 'Lists coins up 50% in 1 hour that tracked wallets traded.'],
         ['digest', 'Sums the last hour of trades by tracked wallets.'],
@@ -190,7 +190,7 @@ export const copy = {
       digestTop: 'The biggest trade: {name} {side} {sol} of {token}.',
       digestUp: 'Coins up 50% or more: {list}.',
       example: 'Example alert',
-      bot: 'fmt+ bot',
+      bot: 'wtch+ bot',
       botSub: 'Your agent',
       chart: 'Chart',
       copyCa: 'Copy CA',
@@ -209,40 +209,40 @@ export const copy = {
 
   // the blog (src/blog): posts are blocks — { p } paragraph, { h } heading, { ul } list, { fig } a figure by key
   blog: {
-    title: 'fmt+ blog',
-    lead: 'Clear posts with diagrams about how fmt+ works.',
+    title: 'wtch+ blog',
+    lead: 'Clear posts with diagrams about how wtch+ works.',
     all: 'All posts',
     read: '{n} min read',
     toc: 'On this page',
     related: 'More posts',
     cta: 'Spawn your agent and get the trades in Telegram.',
-    by: 'fmt+ team',
+    by: 'wtch+ team',
     posts: {
       what: {
-        title: 'What fmt+ is and how it works',
-        description: 'fmt+ reads the swaps of tracked wallets and sends the trades to you, your Telegram and your AI.',
+        title: 'What wtch+ is and how it works',
+        description: 'wtch+ reads the swaps of tracked wallets and sends the trades to you, your Telegram and your AI.',
         body: [
-          { p: 'fmt+ is an MCP with a personalized AI agent on top. It tracks smart money, indexes every trade and alerts you to what matters.' },
+          { p: 'wtch+ is an MCP with a personalized AI agent on top. It tracks smart money, indexes every trade and alerts you to what matters.' },
           { p: 'This post shows the path of one trade, from the chain to your screen, your Telegram and your AI.' },
           { fig: 'flow' },
           { h: 'Where the data comes from' },
-          { p: 'fmt+ reads Solana. It watches a list of wallets: top traders, plus every wallet a trader adds. For each wallet it reads the new transactions about once a minute.' },
+          { p: 'wtch+ reads Solana. It watches a list of wallets: top traders, plus every wallet a trader adds. For each wallet it reads the new transactions about once a minute.' },
           { h: 'What counts as a trade' },
-          { p: 'A trade is a swap of SOL for a token, or a token for SOL. fmt+ keeps a swap only when the wallet itself paid the fee. That rule drops spam and dust that only name the wallet.' },
+          { p: 'A trade is a swap of SOL for a token, or a token for SOL. wtch+ keeps a swap only when the wallet itself paid the fee. That rule drops spam and dust that only name the wallet.' },
           { ul: ['The swap has to succeed on the chain.', 'The wallet has to pay the fee.', 'The swap has to move 0.05 SOL or more.'] },
           { p: 'Each kept trade stores five facts: side, size in SOL, token, time and transaction.' },
           { h: 'Three ways to use the same trades' },
           { ul: ['The site shows each wallet with its stats and its trades.', 'Your agent sends the trades you care about to Telegram.', 'The MCP gives the same data to Claude, Cursor or any AI client.'] },
           { fig: 'outputs' },
           { h: 'Read only' },
-          { p: 'fmt+ reads public data. It asks for zero private keys. The one signature it asks for is a free message that proves you own your wallet.' },
+          { p: 'wtch+ reads public data. It asks for zero private keys. The one signature it asks for is a free message that proves you own your wallet.' },
         ],
       },
       spawn: {
         title: 'Spawn an agent and get alerts in Telegram',
         description: 'Four steps turn the trades of any wallet into short alerts in your Telegram.',
         body: [
-          { p: 'Your agent is a small set of rules that lives on fmt+. It watches the wallets you pick and sends their trades to your Telegram.' },
+          { p: 'Your agent is a small set of rules that lives on wtch+. It watches the wallets you pick and sends their trades to your Telegram.' },
           { fig: 'steps' },
           { h: 'Step 1: Spawn your agent' },
           { p: 'Press Spawn your agent. Phantom asks you to sign one free message. The message moves zero funds, and it proves you own the wallet.' },
@@ -258,10 +258,10 @@ export const copy = {
         ],
       },
       mcp: {
-        title: 'Use fmt+ in Claude, Cursor or any MCP client',
+        title: 'Use wtch+ in Claude, Cursor or any MCP client',
         description: 'One line gives your AI 11 tools for Solana wallet data.',
         body: [
-          { p: 'MCP is the open standard that lets an AI app use outside tools. fmt+ runs a public MCP server at mcp.fmt.plus.' },
+          { p: 'MCP is the open standard that lets an AI app use outside tools. wtch+ runs a public MCP server at mcp.wtch.plus.' },
           { h: 'Add it in one line' },
           { fig: 'install' },
           { p: 'Claude Code takes the line in a terminal. Cursor takes the JSON in its MCP settings. Your AI picks up the tools on its next start.' },
@@ -274,7 +274,7 @@ export const copy = {
       },
     },
     fig: {
-      flow: { label: 'From the chain to you', chain: 'Solana swaps', core: 'fmt+ keeps real trades', site: 'Site', tg: 'Telegram', ai: 'Your AI' },
+      flow: { label: 'From the chain to you', chain: 'Solana swaps', core: 'wtch+ keeps real trades', site: 'Site', tg: 'Telegram', ai: 'Your AI' },
       steps: { label: 'Four steps to your agent', s: ['Spawn', 'Choose wallets', 'Set rules', 'Telegram'] },
       outputs: { label: 'One trade, three places' },
       filter: { label: 'A day of trades through a 10 SOL rule' },
@@ -284,10 +284,10 @@ export const copy = {
   },
 
   home: {
-    word: 'fmt',
+    word: 'wtch',
     title: 'Every trench tool.\nOne agent.\nYours.',
     deploy: 'Deploy my agent',
-    npx: 'mcp.fmt.plus',
+    npx: 'mcp.wtch.plus',
     agent: 'your agent',
     watching: 'watching {n} wallets',
     wallet: 'wallet',
@@ -321,7 +321,7 @@ export const copy = {
   push: {
     buy: '{name} bought {sol} SOL of {sym}',
     sell: '{name} sold {sol} SOL of {sym}',
-    now: 'fmt+ · {ago}',
+    now: 'wtch+ · {ago}',
   },
 
   wpage: {
@@ -335,7 +335,7 @@ export const copy = {
     size: 'typical buy',
     pace: 'swaps an hour',
     bagsEmpty: 'Only SOL here',
-    pushTitle: 'what fmt+ pushes you',
+    pushTitle: 'what wtch+ pushes you',
     watch: 'Watch this wallet',
     watching: 'Watching',
     copy: 'Copy address',
@@ -391,7 +391,7 @@ export const copy = {
     off: 'Turn off',
     tg: 'Telegram bot',
     soon: 'Soon',
-    keys: 'Read only. fmt+ asks for zero keys.',
+    keys: 'Read only. wtch+ asks for zero keys.',
   },
 
   token: {
@@ -450,8 +450,8 @@ export const copy = {
     how: {
       title: 'How it works',
       steps: [
-        { t: 'Top wallets trade', d: 'fmt+ reads every swap on Solana.' },
-        { t: 'fmt+ scores each swap', d: 'Big moves score high. Dust scores low.' },
+        { t: 'Top wallets trade', d: 'wtch+ reads every swap on Solana.' },
+        { t: 'wtch+ scores each swap', d: 'Big moves score high. Dust scores low.' },
         { t: 'Your agent asks', d: 'One MCP gives it every tool.' },
         { t: 'You get one push', d: 'Telegram pings you on big moves only.' },
       ],
@@ -496,7 +496,7 @@ export const copy = {
       title: 'FAQ',
       items: [
         { q: 'Is it free?', a: 'Yes. The site, the bot and the MCP are free.' },
-        { q: 'Does fmt+ touch my keys?', a: 'Zero keys. It only reads the chain.' },
+        { q: 'Does wtch+ touch my keys?', a: 'Zero keys. It only reads the chain.' },
         { q: 'Where does the data come from?', a: 'Solana itself, read through Helius. Prices come from Jupiter.' },
         { q: 'What counts as a swap?', a: 'A trade the wallet paid for. Spam and dust get dropped.' },
         { q: 'Can I run my own?', a: 'Yes. The code is open on GitHub under MIT.' },

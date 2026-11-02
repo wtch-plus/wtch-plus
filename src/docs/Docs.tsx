@@ -17,7 +17,7 @@ const TOOLS: [string, string][] = [
   ['pnl(wallet)', 'SOL in, out and net'],
   ['style(wallet)', 'flipper or holder, size, pace'],
   ['live(min_sol)', 'swaps across top wallets, scored'],
-  ['top_wallets()', 'the wallets fmt+ watches'],
+  ['top_wallets()', 'the wallets wtch+ watches'],
   ['wallet_stats(wallet)', 'win rate, buys and sells'],
   ['coins_up()', 'coins up 50% in 1 hour'],
   ['digest()', 'the last hour in one answer'],
@@ -153,7 +153,7 @@ export function Docs() {
         <div>
           <h2 className="g-h2">{D.tools.title}</h2>
           <a className="g-cta g-cta-b" href="/tools" onClick={linkClick}>
-            mcp.fmt.plus
+            mcp.wtch.plus
           </a>
         </div>
         <div>

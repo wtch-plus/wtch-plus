@@ -41,7 +41,7 @@ export interface Digest {
 export interface BoardRow {
   name: string;
   w: string;
-  /** On fmt+'s own top list (else added by its owner). */
+  /** On wtch+'s own top list (else added by its owner). */
   top: boolean;
   sol: number | null;
   trades: number;

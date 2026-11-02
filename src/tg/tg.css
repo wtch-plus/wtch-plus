@@ -1,8 +1,8 @@
 /* Mini App: Telegram's theme colors first, the Grid palette as the fallback. */
-.tg-root body { background: var(--tg-theme-bg-color, #eef2f0); }
+.tg-root body { background: var(--tg-theme-bg-color, #F2F1E8); }
 .tg {
-  --bg: var(--tg-theme-bg-color, #eef2f0); --fg: var(--tg-theme-text-color, #0e3b36); --mute: var(--tg-theme-hint-color, #4d6662);
-  --card: var(--tg-theme-secondary-bg-color, #ffffff); --btn: var(--tg-theme-button-color, #0e3b36); --btn-fg: var(--tg-theme-button-text-color, #ffffff);
+  --bg: var(--tg-theme-bg-color, #F2F1E8); --fg: var(--tg-theme-text-color, #202422); --mute: var(--tg-theme-hint-color, #6A7167);
+  --card: var(--tg-theme-secondary-bg-color, #ffffff); --btn: var(--tg-theme-button-color, #202422); --btn-fg: var(--tg-theme-button-text-color, #ffffff);
   --up: #0a7a33; --down: #b0105f; --rule: color-mix(in srgb, var(--fg) 14%, transparent);
   min-height: 100vh; padding: 16px 16px 72px; background: var(--bg); color: var(--fg); font: 16px/1.45 'Inter Tight Variable', system-ui, sans-serif;
 }

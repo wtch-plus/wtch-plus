@@ -106,7 +106,7 @@ export default async function positions(ctx) {
     const add = (a) => a && !accts.has(a) && accts.set(a, { acct: a, newest: null, complete: 1 });
     let prog = row?.prog ?? null;
     // where the coin can sit: the ATA of its program (both until it is known), any open account for it, and on the
-    // first sync the accounts in trades fmt+ already recorded (bots open a fresh account per round and close it)
+    // first sync the accounts in trades wtch+ already recorded (bots open a fresh account per round and close it)
     for (const p of prog ? [prog] : TOKEN_PROGRAMS) add(ata(w, mint, p));
     const open = await chain.rpc('getTokenAccountsByOwner', [w, { mint }, { encoding: 'jsonParsed' }]).catch(() => null);
     for (const a of open?.value || []) add(a.pubkey);
@@ -300,7 +300,7 @@ export default async function positions(ctx) {
       allTimePnlSol: p.allTimePnlSol,
       // the current round began with tokens already there (older history not read): "since" means "since at least"
       partial: Boolean(o?.partialStart),
-      // older rounds may be missing (an account with more history than fmt+ reads)
+      // older rounds may be missing (an account with more history than wtch+ reads)
       historyCut: p.partial || sync0?.complete === 0,
       chart: ch ? { ...ch, marks: p.legs.filter((l) => l.kind === 'buy' || l.kind === 'sell').map((l) => ({ t: l.t, side: l.kind, sol: l.sol })) } : null,
       legs: p.legs.slice(-60),

@@ -36,9 +36,9 @@ export function TgButton({ w, small }: { w?: string; small?: boolean }) {
 }
 
 const SNIP = {
-  claude: 'claude mcp add --transport http fmt https://mcp.fmt.plus',
-  cursor: '{\n  "mcpServers": {\n    "fmt": { "url": "https://mcp.fmt.plus" }\n  }\n}',
-  skill: 'npx fmt-plus skill > ~/.claude/skills/fmt/SKILL.md',
+  claude: 'claude mcp add --transport http wtch https://mcp.wtch.plus',
+  cursor: '{\n  "mcpServers": {\n    "wtch": { "url": "https://mcp.wtch.plus" }\n  }\n}',
+  skill: 'npx wtch-plus skill > ~/.claude/skills/wtch/SKILL.md',
 };
 
 function Snip({ k }: { k: keyof typeof SNIP }) {
@@ -140,7 +140,7 @@ export function Connect() {
             </div>
           ))}
           <div className="g-push">
-            <b>{t.username ? `@${t.username}` : 'fmt+'}</b>
+            <b>{t.username ? `@${t.username}` : 'wtch+'}</b>
             <i className="g-dot sell" aria-hidden /> Cooker sold 79 SOL of $FLOAT
           </div>
         </div>

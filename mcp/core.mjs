@@ -1,6 +1,6 @@
-// fmt+ MCP core, shared by the remote endpoint (server/routes/mcp.mjs → https://mcp.fmt.plus) and the stdio
+// wtch+ MCP core, shared by the remote endpoint (server/routes/mcp.mjs → https://mcp.wtch.plus) and the stdio
 // package (mcp/index.mjs, which ships a copy as mcp/core.mjs). Read-only: no keys, no signing.
-// `get(path)` reads the fmt+ API (/w/<addr>, /events, /board, /signals, /digest, /pos/<addr>/<mint>) and returns parsed JSON.
+// `get(path)` reads the wtch+ API (/w/<addr>, /events, /board, /signals, /digest, /pos/<addr>/<mint>) and returns parsed JSON.
 export const VERSION = '0.3.0';
 const ADDR = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
 const wallet = { type: 'object', properties: { wallet: { type: 'string', description: 'Solana wallet address' } }, required: ['wallet'] };
@@ -11,8 +11,8 @@ export const TOOLS = [
   { name: 'bags', description: 'Token holdings of a wallet with USD value, biggest first.', inputSchema: wallet },
   { name: 'style', description: 'Trading style: flipper or holder, typical buy size, swaps per hour.', inputSchema: wallet },
   { name: 'trades', description: 'The last swaps of a wallet: side, SOL, token, time, tx.', inputSchema: wallet },
-  { name: 'live', description: 'Latest swaps across top Solana wallets fmt+ watches, with an importance score 0-100.', inputSchema: { type: 'object', properties: { min_sol: { type: 'number', description: 'Only swaps of this size and up' } } } },
-  { name: 'top_wallets', description: 'Top wallets fmt+ watches: balance, swaps and SOL moved in 24h.', inputSchema: { type: 'object', properties: {} } },
+  { name: 'live', description: 'Latest swaps across top Solana wallets wtch+ watches, with an importance score 0-100.', inputSchema: { type: 'object', properties: { min_sol: { type: 'number', description: 'Only swaps of this size and up' } } } },
+  { name: 'top_wallets', description: 'Top wallets wtch+ watches: balance, swaps and SOL moved in 24h.', inputSchema: { type: 'object', properties: {} } },
   { name: 'wallet_stats', description: 'Win rate, tokens closed, buys and sells over the wallet’s recent swaps.', inputSchema: wallet },
   { name: 'coins_up', description: 'Coins up 50% or more in 1 hour that tracked wallets traded in the last 24h, with CA, market cap and who traded.', inputSchema: { type: 'object', properties: {} } },
   {
@@ -40,7 +40,7 @@ export async function run(name, a, get) {
     if (!ADDR.test(a.wallet || '')) throw new Error('wallet must be a Solana address');
     const v = await get(`/w/${a.wallet}`);
     const who = v.name || a.wallet.slice(0, 4) + '…' + a.wallet.slice(-4);
-    const link = `\nhttps://fmt.plus/w/${a.wallet}`;
+    const link = `\nhttps://wtch.plus/w/${a.wallet}`;
     switch (name) {
       case 'whats_important':
         return `${who}: ${v.sol} SOL\n` + v.swaps.slice().sort((x, y) => y.sol - x.sol).slice(0, 5).map((s) => `- ${s.side} ${s.sol} SOL ${tok(s)} · ${ago(s.t)} · ${s.mint}`).join('\n') + link;
@@ -96,7 +96,7 @@ export async function run(name, a, get) {
     }
     if (p.allTimePnlSol != null) out.push(`All-time PnL on ${coin}: ${signed(p.allTimePnlSol)} SOL.`);
     out.push(...p.legs.filter((l) => l.kind === 'buy' || l.kind === 'sell').slice(-10).map((l) => `- ${day(l.t)} ${l.kind} ${l.sol} SOL · tx ${l.sig}`));
-    out.push(`CA ${a.mint}`, `https://fmt.plus/w/${a.wallet}`);
+    out.push(`CA ${a.mint}`, `https://wtch.plus/w/${a.wallet}`);
     return out.join('\n');
   }
   if (name === 'coins_up') {
@@ -127,7 +127,7 @@ export async function handle(msg, get) {
       return ok({
         protocolVersion: params?.protocolVersion || '2025-06-18',
         capabilities: { tools: {} },
-        serverInfo: { name: 'fmt-plus', title: 'fmt+', version: VERSION },
+        serverInfo: { name: 'wtch-plus', title: 'wtch+', version: VERSION },
         instructions: 'Read-only Solana trench intel. Start with digest() or coins_up() for the market, whats_important(wallet) for one wallet, position(wallet, mint) for one wallet in one coin.',
       });
     if (method === 'tools/list') return ok({ tools: TOOLS });

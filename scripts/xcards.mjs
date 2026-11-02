@@ -9,7 +9,7 @@ import { join } from 'node:path';
 const ROOT = new URL('..', import.meta.url).pathname;
 const OUT = join(ROOT, 'brand/x-cards');
 const data = (f) => JSON.parse(readFileSync(join(OUT, 'data', f), 'utf8'));
-const C = { paper: '#eef2f0', ink: '#0e3b36', mute: '#4d6662', rule: 'rgba(14,59,54,0.18)', buy: '#0a7a33', sell: '#b0105f', lime: '#b7f540', blue: '#0000ff' };
+const C = { paper: '#F2F1E8', ink: '#202422', mute: '#6A7167', rule: 'rgba(32,36,34,0.18)', buy: '#0a7a33', sell: '#b0105f', lime: '#D7F542', blue: '#202422' };
 const W = 1600;
 const H = 900;
 

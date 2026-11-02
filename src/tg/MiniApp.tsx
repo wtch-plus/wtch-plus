@@ -99,7 +99,7 @@ export function MiniApp() {
         <h1>{t.title}</h1>
         <p>{state === 'loading' ? t.loading : state === 'none' ? t.noAgent : t.outside}</p>
         {state === 'none' && (
-          <button type="button" className="tg-btn" onClick={() => app?.openLink('https://fmt.plus/')}>
+          <button type="button" className="tg-btn" onClick={() => app?.openLink('https://wtch.plus/')}>
             {t.openSite}
           </button>
         )}
